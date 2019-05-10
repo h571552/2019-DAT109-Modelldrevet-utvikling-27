@@ -1,0 +1,291 @@
+class ExpoEAO {}
+class InstituteEAO{}
+class StandEAO{}
+class StudyEAO{}
+class VisitorEAO{}
+class VoteEAO{}
+
+class Admin {
+
+  String username;
+  String hashedPassword;
+  
+}
+class Expo{}
+
+ class Institute{
+   
+   String instituteid;
+   String institutename;
+  
+}
+class Study{
+
+    String expod;
+    boolean voteRegistrationOpen;
+    boolean statisticsOpenToPublic;
+    boolean standRegistrationOpen;
+    boolean verificationRequired;
+  
+}
+
+class AdminEAO{
+
+      1 -- * Admin;
+  
+}
+
+class Stand{
+
+  String standId;
+  String standName;
+  String authors;
+  
+    1 -- 1 Expo;
+    1 -- * Vote;
+
+}
+
+class Study {
+
+  String studyid;
+  String studyname;
+  
+    1 -- 1 Institute;
+    1 -- * Stand;
+  
+}
+
+class Visitor {
+
+  String visitorId;
+  String visitorToken;
+  
+    1 -- * Vote;
+  
+}
+
+class Vote {
+  
+  Integer voteId;
+  Integer voteValue;
+
+}
+
+
+
+class BrowseServlet {
+
+  1 -- 1 InstituteEAO;
+  1 -- 1 StudyEAO;
+  1 -- 1 StandEAO;
+  
+}
+
+class ConfirmNewStandServlet {
+
+    1 -- 1 StandEAO;
+
+}
+
+class ConfirmNewVisitorServlet {}
+
+class GetQRCodeServlet{
+
+    1 -- 1 StandEAO;
+
+}
+
+class NewVisitorServlet {
+
+  1 -- 1 VisitorEAO;
+  1 -- 1 ExpoEAO;
+  
+
+}
+
+class QRCodeServlet {}
+
+class RegistrationClosedServlet{}
+
+class RegistrationServlet {
+  
+    1 -- 1 StandEAO;
+    1 -- 1 ExpoEAO;
+    1 -- 1 StudyEAO;
+
+}
+
+class ResultServlet {
+
+    1 -- 1 VoteEAO;
+    1 -- 1 InstituteEAO;
+    1 -- 1 Expo;
+
+}
+
+class StandServlet {
+
+  1 -- 1 StandEAO;
+  1 -- 1 VoteEAO;
+
+}
+
+class StartServlet {
+
+  Access{
+  
+    Default {
+      entry/{doGet();}
+      exit/{doPost();}
+    }
+    
+    IncorrectPassword{
+      entry/{doGet();}
+      exit/{doPost();}
+    }
+    
+    IncorrectStand{
+      entry/{doGet();}
+      exit/{doPost();}
+    }
+    
+  }
+  
+  Integer timeout;
+  1 -- 1 AdminEAO;
+  1 -- 1 StandEAO;
+  1 -- 1 ExpoEAO;
+
+}
+
+class VerificationServlet {
+
+ 1 -- 1 VisitorEAO;
+  
+}
+
+class VoteServlet {
+
+  1 -- 1 VoteEAO;
+  1 -- 1 StandEAO;
+  1 -- 1 Expo;
+
+}
+
+class AdminBrowseServlet {
+
+    1 -- 1 InstituteEAO;
+    1 -- 1 StandEAO;
+   1 -- 1 StudyEAO;
+        
+
+}
+
+class AdminEditStandServlet {
+
+  1 -- 1 InstituteEAO;
+  1 -- 1 StudyEAO;
+  1 -- 1 StandEAO;
+
+
+}
+
+
+class AdminServlet {
+
+  
+    Access{
+  
+    Default {
+      entry/{doGet();}
+      exit/{doPost();}
+    }
+    
+    RegistrationStands{
+      entry/{doGet();}
+      exit/{doPost();}
+    }
+    
+    RegistrationVotes{
+      entry/{doGet();}
+      exit/{doPost();}
+    }
+      
+     RegistrationSMS{
+      entry/{doGet();}
+      exit/{doPost();}
+    }
+      
+     RegistrationSMS{
+      entry/{doGet();}
+      exit/{doPost();}
+    }
+    
+  }
+  
+  
+  1 -- 1 AdminEAO;
+  1 -- 1 ExpoEAO;
+
+}
+
+class LogoutServlet {}
+class MessageBird {
+
+  String API_KEY;
+  
+}
+class SMSMock {}
+
+class InstituteResult {
+
+  1 -- * StandResult;
+  1 -- 1 Institute;
+
+}
+
+class Result {
+
+  Integer MINSTE_ANTALL_STEMMER;
+  1 -- * Vote;
+  1 -- * StandResult;
+  1 -- * StudyResult;
+  1 -- * InstituteResult;
+
+}
+
+class StandResult {
+
+  1 -- * Vote;
+  1 -- 1 Stand;
+
+}
+
+class StudyResult {
+
+  1 -- * StandResult;
+  1 -- 1 Study;
+
+}
+
+class AdminTasks {}
+class LoginUtils{}
+class PasswordUtil{
+
+  Integer SALTLENGDE;
+  String PASSORD_TEGNSETT;
+  String HASH_ALGORITME;
+  Integer HASH_ITERATIONS;
+  
+}
+class QRUtils{}
+class SessionUtils{}
+class VerificationUtils{}
+class VoteUtils{}
+
+
+
+
+
+
